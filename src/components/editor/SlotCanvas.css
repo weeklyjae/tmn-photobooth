@@ -1,0 +1,17 @@
+.slot-canvas-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  overflow: auto;
+  max-height: calc(100vh - 200px);
+}
+
+.slot-canvas {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: crosshair;
+  background: white;
+}

@@ -1,0 +1,156 @@
+.camera-capture {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.camera-preview-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  width: 100%;
+}
+
+.camera-preview-small {
+  position: relative;
+  width: 600px;
+  max-width: 90vw;
+  aspect-ratio: 3/4;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.camera-preview {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.video-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.preview-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.loading {
+  color: white;
+  font-size: 24px;
+}
+
+.camera-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.capture-button {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 4px solid white;
+  background: #007bff;
+  color: white;
+  font-size: 36px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.capture-button:hover:not(:disabled) {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(0, 123, 255, 0.5);
+}
+
+.capture-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.countdown-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+
+.countdown-number {
+  font-size: 120px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+  animation: pulse 1s ease-in-out infinite;
+}
+
+.photo-progress {
+  margin-top: 20px;
+  font-size: 24px;
+  color: white;
+  font-weight: 600;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+}
+
+.countdown-text {
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.photo-counter {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.camera-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  color: white;
+  gap: 20px;
+}

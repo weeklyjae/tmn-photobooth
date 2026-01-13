@@ -1,0 +1,117 @@
+.slot-editor {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.editor-header h2 {
+  margin: 0;
+}
+
+.editor-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.editor-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.canvas-section {
+  flex: 1;
+  overflow: auto;
+}
+
+.properties-section {
+  width: 300px;
+  border-left: 1px solid #eee;
+  padding: 20px;
+  overflow-y: auto;
+  background: #f9f9f9;
+}
+
+.slot-properties {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.slot-properties h3 {
+  margin: 0 0 16px 0;
+}
+
+.property-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.property-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.property-group input,
+.property-group select {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.property-group input:focus,
+.property-group select:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.no-selection {
+  padding: 40px 20px;
+  text-align: center;
+  color: #666;
+}
+
+.slots-list {
+  margin-top: 24px;
+}
+
+.slots-list h3 {
+  margin: 0 0 12px 0;
+}
+
+.slot-item {
+  padding: 12px;
+  margin-bottom: 8px;
+  background: white;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.slot-item:hover {
+  border-color: #007bff;
+}
+
+.slot-item.selected {
+  border-color: #007bff;
+  background: #e7f3ff;
+}
+
+.slot-editor-empty {
+  padding: 40px;
+  text-align: center;
+  color: #666;
+}

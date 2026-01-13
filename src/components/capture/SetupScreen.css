@@ -1,0 +1,83 @@
+.setup-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.setup-content {
+  background: white;
+  padding: 60px;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  min-width: 400px;
+}
+
+.setup-content h1 {
+  margin: 0 0 40px 0;
+  font-size: 32px;
+  color: #333;
+}
+
+.selector-group {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.copies-selector {
+  margin-bottom: 0;
+}
+
+.selector-description {
+  font-size: 14px;
+  color: #666;
+  margin: 8px 0 12px 0;
+  font-style: italic;
+}
+
+.info-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.info-display label {
+  font-size: 18px;
+  font-weight: 600;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.info-value {
+  font-size: 48px;
+  font-weight: 700;
+  color: #28a745;
+  min-width: 80px;
+  text-align: center;
+}
+
+.copies-selector label {
+  display: block;
+  font-size: 18px;
+  font-weight: 600;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.copies-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.copies-value {
+  font-size: 48px;
+  font-weight: 700;
+  color: #007bff;
+  min-width: 80px;
+}

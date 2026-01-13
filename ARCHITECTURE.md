@@ -10,7 +10,7 @@ src/
 │   │   ├── TemplateUpload.jsx      # Template PNG upload
 │   │   └── SlotCanvas.jsx          # Canvas for template + slot visualization
 │   ├── capture/
-│   │   ├── SetupScreen.jsx         # Pre-capture setup (mode, copies)
+│   │   ├── SetupScreen.jsx         # Pre-capture setup (copies)
 │   │   ├── CameraCapture.jsx       # Camera interface & capture
 │   │   └── PhotoPreview.jsx         # Preview before finalizing
 │   ├── composition/
@@ -79,7 +79,6 @@ src/
 ```javascript
 {
   id: string,
-  mode: 'solo' | 'group',
   copies: number,                // Copies per strip
   photos: Photo[],               // Captured photos
   templateId: string,
@@ -147,7 +146,6 @@ src/
 ### Flow 2: Photo Capture to Print
 ```
 1. User sees SetupScreen
-   - Select mode: Solo or Group
    - Adjust copies: + / - buttons (default: 1)
    - Click "Start Capture"
 
@@ -156,7 +154,6 @@ src/
    - Shows live preview
    - User clicks capture button
    - Captures photo(s)
-   - For Group mode: capture multiple photos (one per person)
 
 3. PhotoPreview
    - Shows captured photos
@@ -171,9 +168,7 @@ src/
    - Generates final strip image
 
 5. Print Queue
-   - Adds strip(s) to queue
-   - Solo mode: 1 strip × copies
-   - Group mode: N strips (one per person) × copies
+   - Adds strip to queue with specified copies
    - Shows queue progress (e.g., "2/4 filled")
 
 6. Print Pooling
@@ -272,7 +267,7 @@ GET /api/templates/:id (optional)
 
 ```
 1. Template Editor (admin mode)
-2. Setup Screen (mode selection)
+2. Setup Screen (copies selection)
 3. Camera Capture
 4. Photo Preview
 5. QR Display (after composition)
