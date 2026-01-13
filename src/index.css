@@ -9,6 +9,19 @@
   color: #213547;
   background-color: #ffffff;
 
+  --bg: #0b1220;
+  --surface: rgba(17, 24, 39, 0.85);
+  --surface-2: rgba(17, 24, 39, 0.55);
+  --card: #ffffff;
+  --text: #e5e7eb;
+  --text-muted: rgba(229, 231, 235, 0.75);
+  --brand: #4f46e5;
+  --brand-2: #06b6d4;
+  --ok: #22c55e;
+  --danger: #ef4444;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  --shadow-soft: 0 8px 20px rgba(0, 0, 0, 0.12);
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

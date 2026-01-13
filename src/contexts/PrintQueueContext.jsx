@@ -51,7 +51,11 @@ export function PrintQueueProvider({ children }) {
         : item
     ));
 
-    printStrips(stripsToPrint, settings.printPoolSize, settings.cutGuidesEnabled);
+    printStrips(stripsToPrint, settings.printPoolSize, settings.cutGuidesEnabled, {
+      orientation: settings.printOrientation || 'landscape',
+      gapMm: typeof settings.printGapMm === 'number' ? settings.printGapMm : 3,
+      marginMm: typeof settings.printMarginMm === 'number' ? settings.printMarginMm : 4,
+    });
 
     // Mark as printed after a delay
     setTimeout(() => {

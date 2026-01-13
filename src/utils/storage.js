@@ -4,6 +4,18 @@ const TEMPLATES_KEY = 'photobooth_templates';
 const CURRENT_TEMPLATE_KEY = 'photobooth_current_template';
 const EVENT_SETTINGS_KEY = 'photobooth_event_settings';
 
+const DEFAULT_EVENT_SETTINGS = {
+  defaultCopies: 1,
+  // 5 strips per A4 landscape by default (event-friendly cutting layout)
+  printPoolSize: 5,
+  autoPrintTimeout: 0,
+  qrExpiryHours: 24,
+  cutGuidesEnabled: true,
+  printOrientation: 'landscape',
+  printGapMm: 3,
+  printMarginMm: 4
+};
+
 export const storage = {
   // Templates
   getTemplates() {
@@ -63,22 +75,27 @@ export const storage = {
   getEventSettings() {
     try {
       const data = localStorage.getItem(EVENT_SETTINGS_KEY);
-      return data ? JSON.parse(data) : {
-        defaultCopies: 1,
-        printPoolSize: 4,
-        autoPrintTimeout: 0,
-        qrExpiryHours: 24,
-        cutGuidesEnabled: true
-      };
+      const parsed = data ? JSON.parse(data) : null;
+
+      // Merge defaults to support new keys (migration)
+      const merged = parsed ? { ...DEFAULT_EVENT_SETTINGS, ...parsed } : { ...DEFAULT_EVENT_SETTINGS };
+
+      // Hard migration: older builds used 4-up. This project now standardizes on 5-up landscape.
+      // If user previously had 4, upgrade them to 5 automatically.
+      if (merged.printPoolSize === 4) {
+        merged.printPoolSize = 5;
+      }
+
+      // Safety clamps
+      if (!merged.printPoolSize || merged.printPoolSize < 1) merged.printPoolSize = 5;
+      if (!merged.printOrientation) merged.printOrientation = 'landscape';
+      if (typeof merged.printGapMm !== 'number') merged.printGapMm = 3;
+      if (typeof merged.printMarginMm !== 'number') merged.printMarginMm = 4;
+
+      return merged;
     } catch (error) {
       console.error('Error reading event settings:', error);
-      return {
-        defaultCopies: 1,
-        printPoolSize: 4,
-        autoPrintTimeout: 0,
-        qrExpiryHours: 24,
-        cutGuidesEnabled: true
-      };
+      return { ...DEFAULT_EVENT_SETTINGS };
     }
   },
 

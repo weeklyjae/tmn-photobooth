@@ -1,30 +1,198 @@
 .camera-capture {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  /* Header is sticky; keep capture UI within viewport without page scroll */
+  height: calc(100vh - 64px);
   background: #000;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
+  padding: 14px;
+  gap: 12px;
+  overflow: hidden;
 }
 
-.camera-preview-container {
+.camera-layout {
+  display: flex;
+  flex: 1;
+  gap: 12px;
+  overflow: hidden;
+  align-items: stretch;
+}
+
+/* Column wrapper so the frame can keep its aspect ratio (no flex-stretch wide) */
+.camera-live-column {
+  flex: 1;
+  min-width: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex: 1;
-  width: 100%;
+  overflow: hidden;
 }
 
-.camera-preview-small {
+/* Large live camera frame */
+.camera-live-frame {
+  /* IMPORTANT: do NOT let flex stretch width; size comes from aspect-ratio */
+  flex: 0 0 auto;
   position: relative;
-  width: 600px;
-  max-width: 90vw;
-  aspect-ratio: 3/4;
+  background: #000;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  max-height: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: var(--shadow);
+  /* Make sure it doesn't exceed viewport height */
+  max-height: 100%;
+}
+
+.video-preview-large {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Template strip preview panel */
+.strip-preview-panel {
+  /* Smaller panel so the strip always fits vertically */
+  width: clamp(200px, 18vw, 260px);
+  background: rgba(17, 24, 39, 0.72);
+  border-radius: 16px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.strip-preview-panel h3 {
+  color: white;
+  margin: 0;
+  font-size: 13px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.35px;
+  opacity: 0.9;
+}
+
+.strip-preview-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: #000;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  padding: 6px;
+  min-height: 0;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.strip-preview-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.template-image-container {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.strip-preview-image {
+  /* Fit full strip into panel without scrolling */
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+  position: relative;
+  z-index: 2;
+}
+
+.slot-photos-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.slot-photo-container {
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.slot-photo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.strip-preview-placeholder {
+  color: #666;
+  text-align: center;
+  padding: 40px;
+}
+
+.photo-status {
+  text-align: center;
+}
+
+.status-text {
+  color: rgba(229, 231, 235, 0.85);
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
+.photo-thumbnails {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.photo-thumbnail-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #2a2a2a;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.photo-thumbnail {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 2px solid #28a745;
+}
+
+.photo-number {
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
 }
 
 .camera-preview {
@@ -40,16 +208,22 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  transform: translateZ(0); /* Hardware acceleration */
+  will-change: transform;
 }
 
-.preview-overlay {
+.template-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  object-fit: cover;
   pointer-events: none;
   z-index: 10;
+  opacity: 0.85;
+  transform: translateZ(0); /* Hardware acceleration */
+  will-change: opacity;
 }
 
 .loading {
@@ -61,16 +235,21 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 30px;
-  background: rgba(0, 0, 0, 0.8);
+  padding: 10px 12px;
+  background: rgba(17, 24, 39, 0.72);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .capture-button {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  border: 4px solid white;
-  background: #007bff;
+  border: 4px solid rgba(255, 255, 255, 0.92);
+  background: linear-gradient(135deg, var(--brand), #2563eb);
   color: white;
   font-size: 36px;
   cursor: pointer;

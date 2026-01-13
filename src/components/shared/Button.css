@@ -18,25 +18,29 @@
 }
 
 .btn-primary {
-  background: #007bff;
+  background: linear-gradient(135deg, var(--brand), #2563eb);
   color: white;
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: #0056b3;
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(79, 70, 229, 0.35);
 }
 
 .btn-secondary {
-  background: #6c757d;
+  background: rgba(255, 255, 255, 0.10);
   color: white;
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .btn-secondary:hover:not(:disabled) {
-  background: #545b62;
+  background: rgba(255, 255, 255, 0.16);
+  transform: translateY(-1px);
 }
 
 .btn-success {
-  background: #28a745;
+  background: linear-gradient(135deg, var(--ok), #16a34a);
   color: white;
 }
 
@@ -45,7 +49,7 @@
 }
 
 .btn-danger {
-  background: #dc3545;
+  background: linear-gradient(135deg, var(--danger), #dc2626);
   color: white;
 }
 

@@ -2,17 +2,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  min-height: calc(100vh - 64px);
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 16px;
 }
 
 .setup-content {
   background: white;
-  padding: 60px;
+  padding: 34px;
   border-radius: 16px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
   text-align: center;
-  min-width: 400px;
+  width: min(520px, 100%);
 }
 
 .setup-content h1 {
