@@ -1,9 +1,9 @@
 .btn {
   padding: 12px 24px;
-  border: none;
-  border-radius: 8px;
+  border: 1px solid transparent;
+  border-radius: 999px;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 800;
   cursor: pointer;
   transition: all 0.2s;
   display: inline-flex;
@@ -18,25 +18,27 @@
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--brand), #2563eb);
-  color: white;
+  background: var(--brand);
+  color: var(--brand-ink);
+  border-color: rgba(0,0,0,0.08);
 }
 
 .btn-primary:hover:not(:disabled) {
   filter: brightness(1.06);
   transform: translateY(-1px);
-  box-shadow: 0 10px 22px rgba(79, 70, 229, 0.35);
+  box-shadow: 0 10px 22px rgba(245, 158, 11, 0.22);
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.10);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: #ffffff;
+  color: var(--text);
+  border-color: var(--border);
 }
 
 .btn-secondary:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.16);
+  background: #ffffff;
   transform: translateY(-1px);
+  box-shadow: var(--shadow-soft);
 }
 
 .btn-success {

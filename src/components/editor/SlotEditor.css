@@ -71,6 +71,27 @@
   font-size: 14px;
 }
 
+.file-input {
+  display: none;
+}
+
+.background-upload-label {
+  display: inline-block;
+  padding: 8px 16px;
+  background: #007bff;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  transition: background 0.2s;
+}
+
+.background-upload-label:hover {
+  background: #0056b3;
+}
+
 .property-group input:focus,
 .property-group select:focus {
   outline: none;
@@ -81,6 +102,38 @@
   padding: 40px 20px;
   text-align: center;
   color: #666;
+}
+
+.template-properties {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #ddd;
+}
+
+.template-properties h3 {
+  margin: 0 0 16px 0;
+}
+
+.property-hint {
+  font-size: 12px;
+  color: #666;
+  margin: 4px 0 0 0;
+  font-style: italic;
+}
+
+.background-preview {
+  margin-top: 12px;
+  border-radius: 8px;
+  border: 2px solid #ddd;
+  overflow: hidden;
+  max-height: 200px;
+}
+
+.background-preview img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
 }
 
 .slots-list {

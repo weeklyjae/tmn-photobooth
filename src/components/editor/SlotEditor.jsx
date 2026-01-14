@@ -9,12 +9,37 @@ export function SlotEditor({ template, onSave }) {
   const [slots, setSlots] = useState(template?.slots || []);
   const [selectedSlotId, setSelectedSlotId] = useState(null);
   const [detecting, setDetecting] = useState(false);
+  const [background, setBackground] = useState(template?.background || null);
 
   useEffect(() => {
     if (template) {
       setSlots(template.slots || []);
+      setBackground(template.background || null);
     }
   }, [template]);
+
+  const handleBackgroundUpload = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+      alert('Please upload an image file');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      setBackground(event.target.result);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleRemoveBackground = () => {
+    setBackground(null);
+    // Reset file input
+    const input = document.getElementById('background-file-input');
+    if (input) input.value = '';
+  };
 
   const addSlot = () => {
     const newSlot = {
@@ -91,7 +116,8 @@ export function SlotEditor({ template, onSave }) {
     const sortedSlots = [...slots].sort((a, b) => a.y - b.y);
     onSave({
       ...template,
-      slots: sortedSlots
+      slots: sortedSlots,
+      background: background
     });
   };
 
@@ -179,6 +205,34 @@ export function SlotEditor({ template, onSave }) {
               <p>Or click "Add Slot" to create a new one</p>
             </div>
           )}
+
+          <div className="template-properties">
+            <h3>Template Background</h3>
+            <div className="property-group">
+              <label>Background Image</label>
+              <label htmlFor="background-file-input" className="background-upload-label">
+                {background ? 'Change Image' : 'Upload Image'}
+              </label>
+              <input
+                id="background-file-input"
+                type="file"
+                accept="image/png,image/jpeg,image/jpg"
+                onChange={handleBackgroundUpload}
+                className="file-input"
+              />
+              {background && (
+                <Button onClick={handleRemoveBackground} variant="danger" size="small" style={{ marginTop: '8px' }}>
+                  Remove Background
+                </Button>
+              )}
+              <p className="property-hint">Upload a background image for the home screen</p>
+            </div>
+            {background && (
+              <div className="background-preview">
+                <img src={background} alt="Background preview" />
+              </div>
+            )}
+          </div>
 
           <div className="slots-list">
             <h3>Slots ({slots.length})</h3>

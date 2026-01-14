@@ -4,14 +4,13 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: inherit;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: radial-gradient(1200px 800px at 20% 10%, rgba(79, 70, 229, 0.18), transparent 60%),
-              radial-gradient(900px 700px at 80% 20%, rgba(6, 182, 212, 0.14), transparent 55%),
-              var(--bg);
+  background:
+    radial-gradient(900px 600px at 15% 0%, rgba(245, 158, 11, 0.12), transparent 60%),
+    radial-gradient(900px 600px at 85% 10%, rgba(2, 6, 23, 0.05), transparent 60%),
+    linear-gradient(180deg, #ffffff 0%, #f8fafc 35%, #f1f5f9 100%);
 }
 
 .app {
@@ -21,24 +20,27 @@ body {
 }
 
 .app-header {
-  background: linear-gradient(90deg, rgba(17, 24, 39, 0.92), rgba(17, 24, 39, 0.75));
-  color: white;
-  padding: 16px 28px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--text);
+  padding: 14px 22px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-shadow: var(--shadow);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
   z-index: 200;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .app-header h1 {
   margin: 0;
-  font-size: 18px;
-  letter-spacing: 0.2px;
-  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: 0.4px;
+  font-weight: 900;
+  text-transform: uppercase;
 }
 
 .app-nav {
@@ -58,10 +60,11 @@ body {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  background: rgba(255, 255, 255, 0.92);
+  background: var(--surface);
   border-radius: 16px;
   box-shadow: var(--shadow-soft);
   margin-top: 28px;
+  border: 1px solid var(--border);
 }
 
 @keyframes spin {

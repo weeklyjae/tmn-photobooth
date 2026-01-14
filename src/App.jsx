@@ -54,12 +54,12 @@ function MainApp() {
   };
 
   // Capture flow
-  const handleStartCapture = (copies, numPhotos) => {
+  const handleStartCapture = (numPhotos) => {
     if (!currentTemplate) {
       alert('Please select or create a template first');
       return;
     }
-    setCaptureState({ copies, numPhotos, photos: [], retakingIndex: null });
+    setCaptureState({ numPhotos, photos: [], retakingIndex: null });
     setView('camera');
   };
 
@@ -90,11 +90,12 @@ function MainApp() {
     setView('preview');
   };
 
-  const handlePreviewConfirm = () => {
+  const handlePreviewConfirm = (copies) => {
     if (captureState.photos.length === 0) {
       alert('No photos captured');
       return;
     }
+    setCaptureState(prev => ({ ...prev, copies }));
     setView('composing');
   };
 
@@ -116,7 +117,7 @@ function MainApp() {
     setComposedStrip(strip);
     
     // Add to print queue
-    addToQueue(strip.stripImage, captureState.copies);
+    addToQueue(strip.stripImage, captureState.copies || settings.defaultCopies || 1);
     
     // Upload for QR
     try {
@@ -215,6 +216,7 @@ function MainApp() {
         {view === 'preview' && (
           <PhotoPreview
             photos={captureState.photos}
+            template={currentTemplate}
             onConfirm={handlePreviewConfirm}
             onRetake={handlePreviewRetake}
             onRetakeOne={handlePreviewRetakeOne}
@@ -254,24 +256,6 @@ function MainApp() {
               }}
             >
               Upload New Template
-            </Button>
-            <Button
-              variant="secondary"
-              size="small"
-              onClick={() => {
-                setIsTemplateModalOpen(false);
-                // Start a new template immediately in editor (no image yet)
-                // If you prefer forcing upload first, remove this and keep only Upload.
-                setNewTemplate({
-                  id: generateUUID(),
-                  name: 'New Template',
-                  templateImage: null,
-                  slots: [],
-                });
-                setView('editor');
-              }}
-            >
-              New (Blank)
             </Button>
           </div>
 
